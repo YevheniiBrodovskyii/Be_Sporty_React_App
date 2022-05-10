@@ -80,4 +80,12 @@ const LoginError = styled.div`
     color:red;
 `
 
-export {LoginPageContent, LoginPageTitle, LoginPageSubtitle, LoginPageInput, LoginPageButton, LoginPageButtonGuest, LoginError};
+const LoginSuccess = styled.div`
+    grid-column:1/3;
+    font-size:20px;
+    font-weight: 600;
+    text-align:center;
+    color:green;
+`
+
+export {LoginPageContent, LoginPageTitle, LoginPageSubtitle, LoginPageInput, LoginPageButton, LoginPageButtonGuest, LoginError, LoginSuccess};

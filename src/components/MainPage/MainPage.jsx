@@ -14,7 +14,7 @@ function MainPage({ loaded, token }) {
         <Loader />
       ) : (
         <>
-          {token.length === 0 ? (
+          {!token.token ? (
             <LoginPage />
           ) : (
             <BrowserRouter>

@@ -9,6 +9,7 @@ import {
   LoginPageButton,
   LoginPageButtonGuest,
   LoginError,
+  LoginSuccess,
 } from "./styled.js";
 
 import CreateAccPage from "../CreateAccPage/CreateAccPage";
@@ -17,6 +18,9 @@ function LoginPage({ token }) {
   const [signUp, isSignUpOpen] = useState(false);
   const [username, isUsername] = useState("");
   const [password, isPassword] = useState("");
+
+  const [errorMessage, isErrorMessage] = useState(false);
+  const [successMessage, isSuccessMessage] = useState(false);
 
   function LoginUser() {
     let user = {
@@ -46,7 +50,10 @@ function LoginPage({ token }) {
   return (
     <>
       {signUp ? (
-        <CreateAccPage isSignUpOpen={isSignUpOpen} />
+        <CreateAccPage
+          isSignUpOpen={isSignUpOpen}
+          isSuccessMessage={isSuccessMessage}
+        />
       ) : (
         <LoginPageContent>
           <LoginPageTitle>Sign in to SportApp</LoginPageTitle>
@@ -64,7 +71,12 @@ function LoginPage({ token }) {
               isPassword(e.target.value);
             }}
           />
-          <LoginError>Error Message</LoginError>
+          {errorMessage ? <LoginError>Error Message</LoginError> : <></>}
+          {successMessage ? (
+            <LoginSuccess>Sign in using the created account</LoginSuccess>
+          ) : (
+            <></>
+          )}
           <LoginPageButton onClick={() => LoginUser()}>Login</LoginPageButton>
           <LoginPageButton onClick={() => isSignUpOpen(true)}>
             Sign Up

@@ -8,15 +8,19 @@ import {
   CreateAccInput,
   CreateAccButton,
   CreateAccError,
+  CreateAccSuccess,
+  CreateAccSuccessImgContainer,
+  CreateAccSuccessImg,
 } from "./styled.js";
 
 function CreateAccPage(props) {
-  const { isSignUpOpen } = props;
+  const { isSignUpOpen, isSuccessMessage } = props;
 
   const [username, isUsername] = useState("");
   const [email, isEmail] = useState("");
   const [password, isPassword] = useState("");
   const [passwordRepeat, isPasswordRepeat] = useState("");
+  const [newUser, isNewUser] = useState(false);
 
   const [errorUsernameEmpty, isErrorUsernameEmpty] = useState(false);
   const [errorEmailValid, isErrorEmailValid] = useState(false);
@@ -25,9 +29,9 @@ function CreateAccPage(props) {
 
   function signUpUser() {
     if (
-      !errorUsernameEmpty &&
-      !errorEmailValid &&
-      !passwordValid
+      !errorUsernameEmpty
+      // !errorEmailValid &&
+      // !passwordValid
       // !passwordMatch
     ) {
       let user = {
@@ -39,9 +43,7 @@ function CreateAccPage(props) {
       const requestOptions = {
         method: "POST",
         headers: {
-          "Access-Control-Allow-Headers": "Content-Type",
           "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
           Accept: "*/*",
         },
         body: JSON.stringify(user),
@@ -56,6 +58,12 @@ function CreateAccPage(props) {
         getToken(data);
       };
       fetchToken();
+      isNewUser(true);
+      isSuccessMessage(true);
+      setTimeout(() => {
+        isNewUser(false);
+        isSignUpOpen(false);
+      }, 3000);
     }
   }
 
@@ -72,65 +80,78 @@ function CreateAccPage(props) {
   }, [username, email, password, passwordRepeat]);
 
   return (
-    <CreateAccContent>
-      <CreateAccTitle>Create an account </CreateAccTitle>
-      <CreateAccSubtitle>Username:</CreateAccSubtitle>
-      <CreateAccInput
-        placeholder="Your name..."
-        onChange={(e) => {
-          isUsername(e.target.value);
-        }}
-      />
-      {errorUsernameEmpty ? (
-        <CreateAccError>
-          Min length - 4, can contain letters, numbers and "_"{" "}
-        </CreateAccError>
+    <>
+      {newUser ? (
+        <CreateAccSuccess>
+          Successful registration, please wait...
+          <CreateAccSuccessImgContainer>
+            <CreateAccSuccessImg src="./assets/success_icon.svg" />
+          </CreateAccSuccessImgContainer>
+        </CreateAccSuccess>
       ) : (
-        <></>
+        <CreateAccContent>
+          <CreateAccTitle>Create an account </CreateAccTitle>
+          <CreateAccSubtitle>Username:</CreateAccSubtitle>
+          <CreateAccInput
+            placeholder="Your name..."
+            onChange={(e) => {
+              isUsername(e.target.value);
+            }}
+          />
+          {errorUsernameEmpty ? (
+            <CreateAccError>
+              Min length - 4, can contain letters, numbers and "_"{" "}
+            </CreateAccError>
+          ) : (
+            <></>
+          )}
+          <CreateAccSubtitle>E-mail:</CreateAccSubtitle>
+          <CreateAccInput
+            placeholder="example@gmail.com..."
+            onChange={(e) => {
+              isEmail(e.target.value);
+            }}
+          />
+          {errorEmailValid ? (
+            <CreateAccError>example@gmail.com</CreateAccError>
+          ) : (
+            <></>
+          )}
+          <CreateAccSubtitle>Password:</CreateAccSubtitle>
+          <CreateAccInput
+            placeholder="Password..."
+            onChange={(e) => {
+              isPassword(e.target.value);
+            }}
+          />
+          {passwordValid ? (
+            <CreateAccError>
+              Min length - 8, must contain 1 symbol and 1 number
+            </CreateAccError>
+          ) : (
+            <></>
+          )}
+          <CreateAccSubtitle>Confirm Password:</CreateAccSubtitle>
+          <CreateAccInput
+            placeholder="Confirm Password..."
+            onChange={(e) => {
+              isPasswordRepeat(e.target.value);
+            }}
+          />
+          {passwordMatch ? (
+            <CreateAccError>Passwords didn't match</CreateAccError>
+          ) : (
+            <></>
+          )}
+          <CreateAccButton onClick={() => isSignUpOpen(false)}>
+            Back
+          </CreateAccButton>
+          <CreateAccButton onClick={() => signUpUser()}>
+            Sign Up
+          </CreateAccButton>
+        </CreateAccContent>
       )}
-      <CreateAccSubtitle>E-mail:</CreateAccSubtitle>
-      <CreateAccInput
-        placeholder="example@gmail.com..."
-        onChange={(e) => {
-          isEmail(e.target.value);
-        }}
-      />
-      {errorEmailValid ? (
-        <CreateAccError>example@gmail.com</CreateAccError>
-      ) : (
-        <></>
-      )}
-      <CreateAccSubtitle>Password:</CreateAccSubtitle>
-      <CreateAccInput
-        placeholder="Password..."
-        onChange={(e) => {
-          isPassword(e.target.value);
-        }}
-      />
-      {passwordValid ? (
-        <CreateAccError>
-          Min length - 8, must contain 1 symbol and 1 number
-        </CreateAccError>
-      ) : (
-        <></>
-      )}
-      <CreateAccSubtitle>Confirm Password:</CreateAccSubtitle>
-      <CreateAccInput
-        placeholder="Confirm Password..."
-        onChange={(e) => {
-          isPasswordRepeat(e.target.value);
-        }}
-      />
-      {passwordMatch ? (
-        <CreateAccError>Passwords didn't match</CreateAccError>
-      ) : (
-        <></>
-      )}
-      <CreateAccButton onClick={() => isSignUpOpen(false)}>
-        Back
-      </CreateAccButton>
-      <CreateAccButton onClick={() => signUpUser()}>Sign Up</CreateAccButton>
-    </CreateAccContent>
+    </>
   );
 }
 export default CreateAccPage;

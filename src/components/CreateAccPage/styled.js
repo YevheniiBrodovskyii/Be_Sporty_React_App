@@ -68,4 +68,27 @@ const CreateAccError = styled.div`
     color:red;
 `
 
-export {CreateAccContent, CreateAccTitle, CreateAccSubtitle, CreateAccInput, CreateAccButton, CreateAccError};
+const CreateAccSuccess = styled.div`
+    position: relative;
+    top: 150px;
+    width: 600px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 50px 0 20px 0 ;
+    font-size: 25px;
+    text-align: center;
+    color: green;
+    border-radius: 15px;
+    animation: 0.5s ${fade};
+`
+
+const CreateAccSuccessImgContainer = styled.div`
+    width:80%;
+    margin: 0 auto;
+`
+
+const CreateAccSuccessImg = styled.img`
+    margin: 20px 0 0 0;
+`
+
+export {CreateAccContent, CreateAccTitle, CreateAccSubtitle, CreateAccInput, CreateAccButton, CreateAccError,CreateAccSuccess, CreateAccSuccessImgContainer, CreateAccSuccessImg};
