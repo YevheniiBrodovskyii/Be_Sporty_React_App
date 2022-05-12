@@ -5,6 +5,7 @@ import {
   NavBarLogo,
   NavBarButton,
 } from "./styled.js";
+import Burger from "../Burger/Burger.jsx";
 import { useState } from "react";
 
 import NavBarPopup from "../NavBarPopup/NavBarPopup";
@@ -15,6 +16,7 @@ function NavBar() {
   return (
     <>
       <NavBarContainer>
+        <Burger />
         <NavBarLogo src="./assets/logo.svg" alt="logo" />
         <NavBarLinks>
           <StyledLink to="/MyTrainings">My trainings</StyledLink>

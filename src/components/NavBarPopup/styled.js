@@ -11,6 +11,9 @@ const Popup = styled.div`
   background-color: #ffffff;
   transform: ${({ active }) => active ? 'translateX(0)' : 'translateX(100%)'};
   transition: transform 0.3s ease-in-out;
+  @media (min-width: 320px) and (max-width: 480px) {
+    width: 70%;
+  }
 `;
 
 const Overlay = styled.div`
@@ -34,7 +37,7 @@ const NavBarPopupHeader = styled.div`
 const NavBarPopupContainer = styled.p`
   text-align: center;
   margin: 0;
-  padding: 30px 0 0 0;
+  padding: 5% 0 0 0;
 `;
 
 const NavBarPopupImg = styled.img`
@@ -45,6 +48,10 @@ const NavBarPopupImg = styled.img`
   background-color: white;
   color: black;
   font-size: 25px;
+  @media (min-width: 320px) and (max-width: 768px) {
+    width: 60px;
+    height: 60px;
+  }
 `;
 
 const NavBarPopupClose = styled.img`
@@ -59,10 +66,13 @@ const NavBarPopupContent = styled.div`
 `;
 
 const NavBarPopupTitle = styled.h3`
-    margin:0;
-    padding: 10px 0 10px 0;
-    text-align: center;
-    font-size: 30px;
+  margin:0;
+  padding: 10px 0 10px 0;
+  text-align: center;
+  font-size: 30px;
+  @media (min-width: 320px) and (max-width: 480px) {
+    font-size: 20px;
+  }
 `
 
 const NavBarPopupInfo = styled.h4`
@@ -74,12 +84,19 @@ const NavBarPopupInfo = styled.h4`
   background-color: black;
   color:white;
   border-radius: 15px;
-  
+  @media (min-width: 320px) and (max-width: 480px) {
+    font-size: 15px;
+  }
 `
 
 const NavBarPopupContentImg = styled.img`
+  position: absolute;
+  bottom:10%;
   width:100%;
-  margin-top:95px;
+  @media (min-width: 320px) and (max-width: 768px) {
+    height: 40%;
+    object-fit:cover;
+  }
 ` 
 
 const NavBarPopupFooter = styled.div`
@@ -98,6 +115,10 @@ const NavBarPopupSignOut = styled.p`
   color: white;
   text-decoration: underline;
   cursor: pointer;
+  @media (min-width: 320px) and (max-width: 480px) {
+    padding: 25px 0 0 0;
+    font-size: 25px;
+  }
 `;
 
 export {

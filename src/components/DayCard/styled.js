@@ -15,15 +15,18 @@ const DayCardNameContainer = styled.div`
     text-align: center;
     color: #000000;
     font-weight: 700;
-    font-size: 40px;
+    font-size: 50px;
     margin: 0;
-    padding: 0;
+    padding: 5px 0;
+    @media (min-width: 320px) and (max-width: 480px) {
+    font-size: 30px;
+    }
   `;
 
 const DayCardContent = styled.section`
-    width: 300px;
-    height: 300px;
-    margin: 0 auto;
+    width: 400px;
+    height: 400px;
+    margin: 50px auto;
     padding: 0 0 15px 0;
     background-color: #ffffff;
     border-radius: 15px;
@@ -35,13 +38,32 @@ const DayCardContent = styled.section`
         animation: ${shaker} 1s;
       }
     }
+    @media (min-width: 481px) and (max-width: 768px) {
+      width: 90%;
+      height: 410px;
+      margin: 50px auto 50px auto;
+      &:first-child {
+        margin: 150px auto 50px auto;
+      }
+    }
+    @media (min-width: 320px) and (max-width: 480px) {
+      width: 90%;
+      height: 330px;
+      margin: 50px auto 50px auto;
+      &:first-child {
+        margin: 150px auto 50px auto;
+      }
+    }
   `;
 
-    const DayCardExercise = styled.h5`
-        font-size:20px;
-        font-weight: 600;
-        text-align: center;
-        margin: 10px 0 10px 0;
-    `
+const DayCardExercise = styled.h5`
+    font-size:25px;
+    font-weight: 600;
+    text-align: center;
+    margin: 15px 0 15px 0;
+    @media (min-width: 320px) and (max-width: 480px) {
+    font-size:20px;
+    }
+  `
 
 export {DayCardContent,DayCardNameContainer, DayCardName, DayCardExercise};

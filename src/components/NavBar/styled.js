@@ -13,6 +13,13 @@ const NavBarContainer = styled.nav`
     height: 100px;
     background: #ffffff;
     border-radius: 30px;
+    @media (min-width: 320px) and (max-width: 768px) {
+      position:fixed;
+      top:0;
+      left:0;
+      border-top-left-radius:0;
+      border-top-right-radius:0;
+    }
   `;
 
   const NavBarLinks = styled.div`
@@ -20,6 +27,9 @@ const NavBarContainer = styled.nav`
     justify-content: center;
     width: 50%;
     margin: 0 auto;
+    @media (min-width: 769px) and (max-width: 1600px) {
+      width: 70%;
+    }
   `;
 
   const StyledLink = styled(NavLink)`
@@ -35,12 +45,21 @@ const NavBarContainer = styled.nav`
       height: 75px;
       border-bottom: 3px solid black ;
     }
+    @media (min-width: 769px) and (max-width: 1024px) {
+      font-size:18px;
+    }
+    @media (min-width: 320px) and (max-width: 768px) {
+      display:none;
+    }
   `;
 
   const NavBarLogo = styled.img`
     position: absolute;
     top: 15px;
     left: 15px;
+    @media (min-width: 320px) and (max-width: 480px) {
+      width:60px;
+    }
   `;
 
   const NavBarButton = styled.button`
@@ -58,7 +77,14 @@ const NavBarContainer = styled.nav`
     &:hover {
       animation: 1s ${shaker};
     }
+    @media (min-width: 320px) and (max-width: 480px) {
+      width: 65px;
+      height: 65px;
+      top: 15px;
+    }
   `;
+
+  
 
 
 export {NavBarContainer,NavBarLinks,StyledLink, NavBarLogo, NavBarButton};

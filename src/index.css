@@ -26,3 +26,10 @@ code {
   width: 80%;
   margin:  0 auto;
 }
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .container {
+    width: 90%;
+    margin:  0 auto;
+  }
+}
