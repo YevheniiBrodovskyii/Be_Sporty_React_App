@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { connect } from "react-redux";
-import { getToken } from "../../index.js";
+
+import { useDispatch } from "react-redux";
+import { getData } from "../../store/userData.js";
 import {
   LoginPageContent,
   LoginPageTitle,
@@ -14,13 +15,15 @@ import {
 
 import CreateAccPage from "../CreateAccPage/CreateAccPage";
 
-function LoginPage({ token }) {
+function LoginPage() {
   const [signUp, isSignUpOpen] = useState(false);
   const [username, isUsername] = useState("");
   const [password, isPassword] = useState("");
 
   const [errorMessage, isErrorMessage] = useState(false);
   const [successMessage, isSuccessMessage] = useState(false);
+
+  const dispatch = useDispatch();
 
   function LoginUser() {
     let user = {
@@ -42,7 +45,8 @@ function LoginPage({ token }) {
         requestOptions
       );
       const data = await responce.json();
-      getToken(data);
+      const getUserData = () => dispatch(getData(data));
+      getUserData();
     };
     fetchToken();
   }
@@ -87,8 +91,5 @@ function LoginPage({ token }) {
     </>
   );
 }
-const mapStateToProps = (state) => ({
-  loaded: state.loaded,
-  token: state.token,
-});
-export default connect(mapStateToProps)(LoginPage);
+
+export default LoginPage;

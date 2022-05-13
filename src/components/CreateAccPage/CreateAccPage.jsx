@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getToken } from "../../index.js";
+// import { getToken } from "../../index.js";
 
 import {
   CreateAccContent,
@@ -55,7 +55,7 @@ function CreateAccPage(props) {
           requestOptions
         );
         const data = await responce.json();
-        getToken(data);
+        // getToken(data);
       };
       fetchToken();
       isNewUser(true);

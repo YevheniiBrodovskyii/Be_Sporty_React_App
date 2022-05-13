@@ -18,11 +18,20 @@ const PopupMainContent = styled.div`
     top:0;
     left:0;
     height: 100vh;
-    width: 600px;
+    width: 35%;
     z-index: 9999;
     background-color: #ffffff;
     transform: ${({ active }) => active ? 'translateX(0)' : 'translateX(-100%)'};
     transition: transform 0.3s ease-in-out;
+    @media (min-width: 1025px) and (max-width: 1600px) {
+        width: 40%;
+    }
+    @media (min-width: 769px) and (max-width: 1024px) {
+        width: 50%;
+    }
+    @media (min-width: 320px) and (max-width: 768px) {
+        width: 70%;
+    }
 `
 
 const PopupMainTitle = styled.h2`
@@ -30,6 +39,15 @@ const PopupMainTitle = styled.h2`
     font-weight: 700;
     margin: 10px 0 10px 0;
     text-align: center;
+    @media (min-width: 1025px) and (max-width: 1600px) {
+        font-size: 45px;  
+    }
+    @media (min-width: 769px) and (max-width: 1024px) {
+        font-size: 40px;  
+    }
+    @media (min-width: 320px) and (max-width: 768px) {
+        font-size: 30px;  
+    }
 `
 const PopupMainHr = styled.hr`
     width: 70%;
@@ -50,22 +68,52 @@ const PopupMainExercise = styled.h4`
         background-color: black;
         color:white;
     }
+    @media (min-width: 1025px) and (max-width: 1600px) {
+        font-size: 27px;  
+    }
+    @media (min-width: 769px) and (max-width: 1024px) {
+        font-size: 25px;  
+    }
+    @media (min-width: 320px) and (max-width: 768px) {
+        font-size: 20px;  
+    }
 `
 
 const PopupMainExerciseQuestion = styled.img`
     float: right;
     width: 40px;
     margin-top:2px;
+    @media (min-width: 1025px) and (max-width: 1600px) {
+        width: 27px;  
+    }
+    @media (min-width: 769px) and (max-width: 1024px) {
+        width: 25px; 
+    }
+    @media (min-width: 320px) and (max-width: 768px) {
+        width: 20px;
+    }
 `
 
 const PopupMainBackContainer = styled.div`
     width: 100px;
     margin: 0 auto;
+    @media (min-width: 769px) and (max-width: 1600px) {
+        width: 70px; 
+    }
+    @media (min-width: 320px) and (max-width: 768px) {
+        width: 50px;
+    }
 ` 
 
 const PopupMainBack = styled.img`
     position: absolute;
     bottom:25px;
+    @media (min-width: 769px) and (max-width: 1600px) {
+        width: 70px; 
+    }
+    @media (min-width: 320px) and (max-width: 768px) {
+        width: 50px;
+    }
 `
 
 export {Overlay, PopupMainContent, PopupMainTitle, PopupMainHr, PopupMainExercise, PopupMainExerciseQuestion, PopupMainBackContainer, PopupMainBack}

@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import NavBar from "../NavBar/Navbar";
 import AboutUs from "../AboutUs/AboutUs";
 import MyTrainings from "../MyTrainings/MyTrainings";
@@ -7,14 +7,17 @@ import Cards from "../Cards/Cards";
 import LoginPage from "../LoginPage/LoginPage";
 import Loader from "../Loader/Loader";
 
-function MainPage({ loaded, token }) {
+function MainPage() {
+  const data = useSelector((state) => state.data.data);
+  const loaded = useSelector((state) => state.loaded.loaded);
+
   return (
     <>
       {loaded ? (
         <Loader />
       ) : (
         <>
-          {token.token ? (
+          {!data.token ? (
             <LoginPage />
           ) : (
             <BrowserRouter>
@@ -36,8 +39,5 @@ function MainPage({ loaded, token }) {
     </>
   );
 }
-const mapStateToProps = (state) => ({
-  loaded: state.loaded,
-  token: state.token,
-});
-export default connect(mapStateToProps)(MainPage);
+
+export default MainPage;
