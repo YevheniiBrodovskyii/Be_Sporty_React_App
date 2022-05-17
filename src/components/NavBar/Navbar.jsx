@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import {
   NavBarContainer,
   NavBarLinks,
@@ -13,6 +14,10 @@ import NavBarPopup from "../NavBarPopup/NavBarPopup";
 function NavBar() {
   const [popupOpen, isPopupOpen] = useState(false);
 
+  const username = useSelector((state) => state.username.username);
+
+  const pictureLetters = username.slice(0, 1) + username.slice(-1);
+
   return (
     <>
       <NavBarContainer>
@@ -23,9 +28,16 @@ function NavBar() {
           <StyledLink to="/Cards">Main</StyledLink>
           <StyledLink to="/AboutUs">About us</StyledLink>
         </NavBarLinks>
-        <NavBarButton onClick={() => isPopupOpen(true)}>AA</NavBarButton>
+        <NavBarButton onClick={() => isPopupOpen(true)}>
+          {pictureLetters}
+        </NavBarButton>
       </NavBarContainer>
-      <NavBarPopup popupOpen={popupOpen} isPopupOpen={isPopupOpen} />
+      <NavBarPopup
+        popupOpen={popupOpen}
+        isPopupOpen={isPopupOpen}
+        username={username}
+        pictureLetters={pictureLetters}
+      />
     </>
   );
 }

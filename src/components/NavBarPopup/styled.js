@@ -34,23 +34,24 @@ const NavBarPopupHeader = styled.div`
   background-color: #000000;
 `;
 
-const NavBarPopupContainer = styled.p`
-  text-align: center;
-  margin: 0;
-  padding: 5% 0 0 0;
-`;
-
-const NavBarPopupImg = styled.img`
+const NavBarPopupImg = styled.div`
+  position: relative;
+  top:15%;
   width: 80px;
   height: 80px;
+  margin: 0 auto;
   border-radius: 50px;
   border: none;
   background-color: white;
   color: black;
-  font-size: 25px;
+  font-size: 55px;
+  font-weight:600;
+  text-align: center;
   @media (min-width: 320px) and (max-width: 768px) {
+    top:25%;
     width: 60px;
     height: 60px;
+    font-size: 45px;
   }
 `;
 
@@ -78,14 +79,14 @@ const NavBarPopupTitle = styled.h3`
 const NavBarPopupInfo = styled.h4`
   width: 80%;
   margin: 10px auto;
-  padding:5px;
+  padding:20px 0 ;
   text-align: center;
-  font-size: 25px;
+  font-size: 35px;
   background-color: black;
   color:white;
   border-radius: 15px;
   @media (min-width: 320px) and (max-width: 480px) {
-    font-size: 15px;
+    font-size: 25px;
   }
 `
 
@@ -125,7 +126,6 @@ export {
   Popup,
   Overlay,
   NavBarPopupHeader,
-  NavBarPopupContainer,
   NavBarPopupImg,
   NavBarPopupClose,
   NavBarPopupContent,

@@ -26,7 +26,7 @@ function MainPage() {
                 <Route
                   exact
                   path="/MyTrainings"
-                  element={<MyTrainings />}
+                  element={<MyTrainings active={true} />}
                 ></Route>
                 <Route index exact path="/Cards" element={<Cards />}></Route>
                 <Route exact path="/AboutUs" element={<AboutUs />}></Route>

@@ -72,7 +72,8 @@ const NavBarContainer = styled.nav`
     border: none;
     background-color: #252525;
     color: white;
-    font-size: 25px;
+    font-size: 35px;
+    font-weight:bold;
     cursor: pointer;
     &:hover {
       animation: 1s ${shaker};

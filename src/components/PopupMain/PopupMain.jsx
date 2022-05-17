@@ -13,9 +13,11 @@ import {
 import ExerciseDescription from "../ExerciseDescription/ExerciseDescription.jsx";
 
 function PopupMain(props) {
-  const { popupMain, isPopupMainOpen } = props;
+  const { popupMain, isPopupMainOpen, name, exercises } = props;
   const [exerciseDescr, isExerciseDescr] = useState(false);
   const [active, isActive] = useState(false);
+  const [exerciseId, getExerciseId] = useState(null);
+  const [selectedDay, getSelectedDay] = useState("Add to my trainings");
 
   function closePopup() {
     isPopupMainOpen(false);
@@ -31,27 +33,39 @@ function PopupMain(props) {
     <>
       <Overlay active={popupMain} onClick={() => isPopupMainOpen(false)} />
       <PopupMainContent active={popupMain}>
-        <PopupMainTitle>Arm day</PopupMainTitle>
+        <PopupMainTitle>{name}</PopupMainTitle>
         <PopupMainHr />
-        <PopupMainExercise active={active}>
-          Exercise
-          <PopupMainExerciseQuestion
-            src="./assets/popup_main_question.svg"
-            alt="question"
-            onClick={() => clickOnQuestion()}
-          />
-        </PopupMainExercise>
+        {exercises.map((item) => (
+          <PopupMainExercise active={active} key={item.id}>
+            {item.name}
+            <PopupMainExerciseQuestion
+              src="./assets/popup_main_question.svg"
+              alt="question"
+              onClick={() => {
+                clickOnQuestion();
+                getSelectedDay("Add to my trainings");
+                getExerciseId(item.id);
+              }}
+            />
+          </PopupMainExercise>
+        ))}
         <PopupMainBackContainer>
           <PopupMainBack
             src="./assets/popup_main_back.svg"
             alt="back"
-            onClick={() => closePopup()}
+            onClick={() => {
+              closePopup();
+              getSelectedDay("Add to my trainings");
+            }}
           />
         </PopupMainBackContainer>
       </PopupMainContent>
       <ExerciseDescription
         isExerciseDescr={isExerciseDescr}
         active={exerciseDescr}
+        id={exerciseId}
+        selectedDay={selectedDay}
+        getSelectedDay={getSelectedDay}
       />
     </>
   );

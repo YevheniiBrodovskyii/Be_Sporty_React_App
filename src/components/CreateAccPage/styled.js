@@ -10,7 +10,8 @@ const CreateAccContent = styled.div`
     display:grid;
     grid-template: 50% 50%;
     width: 600px;
-    height:80%;
+    height:740px;
+    overflow-y: scroll;
     margin: 0 auto;
     padding: 20px 40px;
     background-color: rgba(255, 255, 255, 0.8);

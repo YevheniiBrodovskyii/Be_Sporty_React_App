@@ -59,7 +59,8 @@ const PopupMainHr = styled.hr`
 `
 
 const PopupMainExercise = styled.h4`
-    font-size: 35px;
+    position:relative;
+    font-size: 30px;
     font-weight: 600;
     margin: 20px 0 20px 0;
     padding: 5px 15px;
@@ -68,34 +69,52 @@ const PopupMainExercise = styled.h4`
         background-color: black;
         color:white;
     }
-    @media (min-width: 1025px) and (max-width: 1600px) {
-        font-size: 27px;  
-    }
-    @media (min-width: 769px) and (max-width: 1024px) {
+    @media (min-width: 1601px) and (max-width: 1800px) {
         font-size: 25px;  
     }
-    @media (min-width: 320px) and (max-width: 768px) {
+    @media (min-width: 1025px) and (max-width: 1600px) {
         font-size: 20px;  
+    }
+    @media (min-width: 769px) and (max-width: 1024px) {
+        font-size: 17px;  
+    }
+    @media (min-width: 481px) and (max-width: 768px) {
+        font-size: 15px;
+    }
+    @media (min-width: 320px) and (max-width: 480px) {
+        font-size: 10px;  
     }
 `
 
 const PopupMainExerciseQuestion = styled.img`
-    float: right;
+    position: absolute;
+    top: 5%;
+    right: 3%;
     width: 40px;
     margin-top:2px;
+    @media (min-width: 1601px) and (max-width: 1800px) {
+        top: 5%;
+        width: 33px;   
+    }
     @media (min-width: 1025px) and (max-width: 1600px) {
+        top: 5%;
         width: 27px;  
     }
     @media (min-width: 769px) and (max-width: 1024px) {
-        width: 25px; 
+        top: 5%;
+        width: 23px; 
     }
-    @media (min-width: 320px) and (max-width: 768px) {
-        width: 20px;
+    @media (min-width: 481px) and (max-width: 768px) {
+        top: 7%;
+        width: 21px;
+    }
+    @media (min-width: 320px) and (max-width: 480px) {
+        width: 18px;
     }
 `
 
 const PopupMainBackContainer = styled.div`
-    width: 100px;
+    width: 80px;
     margin: 0 auto;
     @media (min-width: 769px) and (max-width: 1600px) {
         width: 70px; 
@@ -108,6 +127,7 @@ const PopupMainBackContainer = styled.div`
 const PopupMainBack = styled.img`
     position: absolute;
     bottom:25px;
+    width: 80px; 
     @media (min-width: 769px) and (max-width: 1600px) {
         width: 70px; 
     }

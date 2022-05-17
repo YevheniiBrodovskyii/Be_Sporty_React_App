@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import { useDispatch } from "react-redux";
 import { getData } from "../../store/userData.js";
+import { getUserName } from "../../store/userName.js";
 import {
   LoginPageContent,
   LoginPageTitle,
@@ -46,7 +47,9 @@ function LoginPage() {
       );
       const data = await responce.json();
       const getUserData = () => dispatch(getData(data));
+      const getUserUsername = () => dispatch(getUserName(user.username));
       getUserData();
+      getUserUsername();
     };
     fetchToken();
   }
