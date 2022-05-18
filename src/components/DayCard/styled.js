@@ -67,4 +67,25 @@ const DayCardExercise = styled.h5`
     }
   `
 
-export {DayCardContent,DayCardNameContainer, DayCardName, DayCardExercise};
+const DayCardWarning= styled.div`
+    width:40%;
+    margin:25% auto 0 auto;
+    text-align:center;
+    background-color:#C4C4C4;
+    color:black;
+    font-size:35px;
+    font-weight:600;
+    border-radius: 30px;
+    padding: 10px;
+    @media (min-width: 481px) and (max-width: 768px) {
+      width:60%;
+      margin:130px auto 0 auto;
+    }
+    @media (min-width: 320px) and (max-width: 480px) {
+      width:60%;
+      margin:100px auto 0 auto;
+      font-size:30px;
+      }
+` 
+
+export {DayCardContent,DayCardNameContainer, DayCardName, DayCardExercise, DayCardWarning};

@@ -3,6 +3,7 @@ import {
   DayCardNameContainer,
   DayCardName,
   DayCardExercise,
+  DayCardWarning,
 } from "./styled.js";
 
 import MyTrainingsPopup from "../MyTrainingsPopup/MyTrainingsPopup.jsx";
@@ -20,9 +21,15 @@ function DayCard(props) {
         <DayCardNameContainer>
           <DayCardName>{dayUppercase}</DayCardName>
         </DayCardNameContainer>
-        {exercisesPerDay.map((item, idDay) => (
-          <DayCardExercise key={idDay}>{item.name}</DayCardExercise>
-        ))}
+        {exercisesPerDay.length === 0 ? (
+          <DayCardWarning>Empty...</DayCardWarning>
+        ) : (
+          <>
+            {exercisesPerDay.map((item, idDay) => (
+              <DayCardExercise key={idDay}>{item.name}</DayCardExercise>
+            ))}
+          </>
+        )}
       </DayCardContent>
       {popupOpen ? (
         <MyTrainingsPopup

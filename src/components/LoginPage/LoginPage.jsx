@@ -1,8 +1,8 @@
 import { useState } from "react";
-
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getData } from "../../store/userData.js";
 import { getUserName } from "../../store/userName.js";
+import { setError } from "../../store/errorInfo.js";
 import {
   LoginPageContent,
   LoginPageTitle,
@@ -21,8 +21,9 @@ function LoginPage() {
   const [username, isUsername] = useState("");
   const [password, isPassword] = useState("");
 
-  const [errorMessage, isErrorMessage] = useState(false);
   const [successMessage, isSuccessMessage] = useState(false);
+
+  const errorMessage = useSelector((state) => state.error.error);
 
   const dispatch = useDispatch();
 
@@ -46,12 +47,16 @@ function LoginPage() {
         requestOptions
       );
       const data = await responce.json();
-      const getUserData = () => dispatch(getData(data));
-      const getUserUsername = () => dispatch(getUserName(user.username));
-      getUserData();
-      getUserUsername();
+      dispatch(getData(data));
+      dispatch(getUserName(user.username));
     };
     fetchToken();
+  }
+
+  function asGuest() {
+    dispatch(getData({ token: "quest" }));
+    dispatch(getUserName("guest"));
+    dispatch(setError(""));
   }
 
   return (
@@ -78,7 +83,7 @@ function LoginPage() {
               isPassword(e.target.value);
             }}
           />
-          {errorMessage ? <LoginError>Error Message</LoginError> : <></>}
+          {errorMessage ? <LoginError>{errorMessage}</LoginError> : <></>}
           {successMessage ? (
             <LoginSuccess>Sign in using the created account</LoginSuccess>
           ) : (
@@ -88,7 +93,9 @@ function LoginPage() {
           <LoginPageButton onClick={() => isSignUpOpen(true)}>
             Sign Up
           </LoginPageButton>
-          <LoginPageButtonGuest>Continiue as guest...</LoginPageButtonGuest>
+          <LoginPageButtonGuest onClick={() => asGuest()}>
+            Continiue as guest...
+          </LoginPageButtonGuest>
         </LoginPageContent>
       )}
     </>

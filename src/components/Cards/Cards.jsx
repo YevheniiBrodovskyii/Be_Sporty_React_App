@@ -1,13 +1,10 @@
 import { CardsContainer } from "./styled.js";
-import { useSelector } from "react-redux";
 
 import Card from "../Card/Card";
 import { useEffect, useState } from "react";
 
 function Cards() {
   const [exerciseGroups, takeExerciseGroups] = useState([]);
-
-  const token = useSelector((state) => state.data.data.token);
 
   useEffect(() => {
     const requestOptions = {
@@ -26,7 +23,7 @@ function Cards() {
       takeExerciseGroups(data);
     };
     fetchExerciseGroups();
-  }, [token]);
+  }, []);
 
   return (
     <CardsContainer>

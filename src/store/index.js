@@ -4,18 +4,20 @@ import storage from 'redux-persist/lib/storage'
 import userData from "./userData";
 import userName from "./userName";
 import loadingStatus from "./loadingStatus";
+import errorInfo from "./errorInfo";
 
 const rootReducer = combineReducers({
     data: userData,
     username: userName,
-    loaded: loadingStatus
+    loaded: loadingStatus,
+    error: errorInfo
 });
 
 
 const persistConfig = {
     key: 'root',
     storage,
-    blacklist: ['loaded']
+    blacklist: ['loaded', 'error']
 }
 
 

@@ -44,7 +44,7 @@ function ExerciseDescription({
       };
       fetchExerciseGroups();
     }
-  }, [active, token, id]);
+  }, [active, id]);
 
   useEffect(() => {
     if (selectedDay === "Add to my trainings") {

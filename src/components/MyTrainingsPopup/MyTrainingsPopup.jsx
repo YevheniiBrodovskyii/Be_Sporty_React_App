@@ -10,10 +10,11 @@ import {
   MyTrainingsPopupBtnContainer,
   MyTrainingsPopupBtn,
   MyTrainingsPopupWarning,
+  MyTrainingsPopupEmptyWarning,
 } from "./styled.js";
 
 function MyTrainingsPopup(props) {
-  const { isPopupOpen, day, exercisesPerDay, isRefetch, refetch } = props;
+  const { isPopupOpen, day, exercisesPerDay, isRefetch } = props;
 
   const token = useSelector((state) => state.data.data.token);
   const username = useSelector((state) => state.username.username);
@@ -52,16 +53,23 @@ function MyTrainingsPopup(props) {
             onClick={() => isPopupOpen(false)}
           />
           <MyTrainingsPopupTitle>{day}</MyTrainingsPopupTitle>
-          {exercisesPerDay.map((item, idExercise) => (
-            <MyTrainingsPopupExercise key={idExercise}>
-              <MyTrainingsPopupExerciseDelete
-                src="./assets/close_red.svg"
-                onClick={() => deleteExercise(item.name)}
-              />
-              {item.name}
-            </MyTrainingsPopupExercise>
-          ))}
-
+          {exercisesPerDay.length === 0 ? (
+            <MyTrainingsPopupEmptyWarning>
+              Empty...
+            </MyTrainingsPopupEmptyWarning>
+          ) : (
+            <>
+              {exercisesPerDay.map((item, idExercise) => (
+                <MyTrainingsPopupExercise key={idExercise}>
+                  <MyTrainingsPopupExerciseDelete
+                    src="./assets/close_red.svg"
+                    onClick={() => deleteExercise(item.name)}
+                  />
+                  {item.name}
+                </MyTrainingsPopupExercise>
+              ))}
+            </>
+          )}
           {exercisesPerDay.length >= 8 ? (
             <MyTrainingsPopupWarning>
               *Your training day should not consist of more than 8 exercises

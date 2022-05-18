@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 import {
@@ -12,8 +11,6 @@ import PopupMain from "../PopupMain/PopupMain.jsx";
 
 function Card({ name, img, id }) {
   const [exercises, takeExercises] = useState([]);
-
-  const token = useSelector((state) => state.data.data.token);
 
   useEffect(() => {
     const requestOptions = {
@@ -32,7 +29,7 @@ function Card({ name, img, id }) {
       takeExercises(data);
     };
     fetchExerciseGroups();
-  }, [token, id]);
+  }, [id]);
 
   const [popupOpen, isPopupOpen] = useState(false);
 
