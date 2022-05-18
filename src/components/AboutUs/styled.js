@@ -31,18 +31,21 @@ const AboutUsTitle = styled.h1`
     animation: ${faderRight} 1s;
     @media (min-width: 1201px) and (max-width: 1730px) {
         width:60%;
+        animation: ${fader} 1s;
     }
     @media (min-width: 769px) and (max-width: 1200px) {
         grid-column: 1/2;
         width:50%;
         margin:50px auto 0 auto;
         font-size: 25px;
+        animation: ${fader} 1s;
     }
     @media (min-width: 320px) and (max-width: 768px) {
         grid-column: 1/2;
         width:80%;
         margin:150px auto 0 auto;
         font-size: 25px;
+        animation: ${fader} 1s;
     }
 `
 
@@ -102,7 +105,7 @@ const AboutUsAuthors = styled.section`
         margin: 0 auto 150px auto;
         font-size:15px; 
         padding: 20px;
-
+        animation: ${fader} 1s;
     }
 `
 

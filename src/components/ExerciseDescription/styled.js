@@ -10,6 +10,8 @@ const Overlay = styled.div`
   width: 100%;
   height: 100vh;
   transition: 0.3s all;
+  z-index: 8899;
+  
 `;
 
 const ExerciseDescriptionContent = styled.div`
@@ -22,33 +24,29 @@ const ExerciseDescriptionContent = styled.div`
     height: 645px;
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
-    z-index: 8888;
+    z-index: 8899;
     background-color: rgba(0, 75, 143, 0.9);
     transform: ${({ active }) => active ? 'translateX(50%)' : 'translateX(-130%)'};
     transition: transform 0.3s ease-in-out;
     @media (min-width: 1025px) and (max-width: 1600px) {
+        background-color: rgba(0, 75, 143, 1);
+        top: 8.7%;
         width:55%;
         transform: ${({ active }) => active ? 'translateX(54.5%)' : 'translateX(-130%)'};
     }
     @media (min-width: 769px) and (max-width: 1024px) {
-        width:95%;
+        width:85%;
         z-index: 9999;
         background-color: rgba(0, 75, 143, 1);
-        transform: ${({ active }) => active ? 'translateX(-11%)' : 'translateX(-130%)'};
+        transform: ${({ active }) => active ? 'translateX(-12%)' : 'translateX(-130%)'};
     }
     @media (min-width: 481px) and (max-width: 768px) {
-        grid-template: 10% 32% 32% 10% / 100% ;
-        column-gap: 0%;
-        row-gap: 2%;
-        width:95%;
+        width:80%;
         z-index: 9999;
         background-color: rgba(0, 75, 143, 1);
-        transform: ${({ active }) => active ? 'translateX(-10.5%)' : 'translateX(-130%)'};
+        transform: ${({ active }) => active ? 'translateX(-12.3%)' : 'translateX(-130%)'};
     }
     @media (min-width: 320px) and (max-width: 480px) {
-        grid-template: 10% 32% 32% 10% / 100% ;
-        column-gap: 0%;
-        row-gap: 2%;
         width:98%;
         z-index: 9999;
         background-color: rgba(0, 75, 143, 1);
@@ -93,11 +91,6 @@ const ExerciseDescriptionImg = styled.img`
     background-color: gray;
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
-    @media (min-width: 320px) and (max-width: 768px) {
-        grid-column: 1/2;
-        border-top-right-radius: 0px;
-        border-bottom-right-radius: 0px;
-    }
 `
 
 const ExerciseDescriptionDescr = styled.div`
@@ -109,13 +102,10 @@ const ExerciseDescriptionDescr = styled.div`
     background-color: black;
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
-    @media (min-width: 1025px) and (max-width: 1200px) {
+    @media (min-width: 481px) and (max-width: 1200px) {
         font-size: 17px;
     }
-    @media (min-width: 320px) and (max-width: 768px) {
-        grid-column: 1/2;
-        border-top-left-radius: 0px;
-        border-bottom-left-radius: 0px;
+    @media (min-width: 320px) and (max-width: 480px) {
         font-size: 13px;
     }
 `
@@ -128,15 +118,20 @@ const ExerciseDescriptionSelect = styled.select`
     margin: 40px auto 0 auto;
     font-size:20px;
     font-weight: 700;
-    @media (min-width: 481px) and (max-width: 768px) {
+    @media (min-width: 1025px) and (max-width: 1600px) {
         grid-column: 1/2;
+        font-size:17px;
+        width: 80%;
+    }
+    @media (min-width: 481px) and (max-width: 768px) {
+        grid-column: 1/3;
         font-size:17px;
         width: 50%;
     }
     @media (min-width: 320px) and (max-width: 480px) {
         grid-column: 1/2;
-        font-size:14px;
-        width: 50%;
+        font-size:13px;
+        width: 90%;
     }
 `
 
@@ -154,7 +149,7 @@ const ExerciseDescriptionButton = styled.button`
     right:-15.5%;
     top:40%;
     z-index:-1;
-    transform: ${({ active }) => active ? 'translateX(0%) rotate(90deg)' : 'translateX(-80%) rotate(90deg)'};
+    transform: ${({ active }) => active ? 'translateX(0%) rotate(90deg)' : 'translateX(-100%) rotate(90deg)'};
     width:20%;
     height: 100px;
     font-size:40px;
@@ -166,6 +161,37 @@ const ExerciseDescriptionButton = styled.button`
     transition: transform 0.5s ease-in-out;
     &:hover {
         background-color:rgba(0, 176, 67, 1);
+    }
+    @media (min-width: 1025px) and (max-width: 1600px) {
+        right:0;
+        top: 84.5%;
+        width:40%;
+        transform: none;
+        visibility: ${({ active }) => active ? 'visible' : 'hidden'};
+        opacity: ${({ active }) => active ? '1' : '0'};
+        border-top-right-radius:0px;
+        border-top-left-radius:30px;
+        border-bottom-right-radius:30px;
+        border-bottom-left-radius:0px;
+        transition: 0.5s ease-in-out;
+    }
+    @media (min-width: 481px) and (max-width: 768px) {
+        font-size:30px;
+        transform: ${({ active }) => active ? 'translateX(0%) rotate(90deg)' : 'translateX(-120%) rotate(90deg)'};
+
+    }
+    @media (min-width: 320px) and (max-width: 481px) {
+        right:0;
+        top: 84.5%;
+        width:40%;
+        transform: none;
+        visibility: ${({ active }) => active ? 'visible' : 'hidden'};
+        opacity: ${({ active }) => active ? '1' : '0'};
+        border-top-right-radius:0px;
+        border-top-left-radius:30px;
+        border-bottom-right-radius:30px;
+        border-bottom-left-radius:0px;
+        transition: 0.5s ease-in-out;
     }
 `
 

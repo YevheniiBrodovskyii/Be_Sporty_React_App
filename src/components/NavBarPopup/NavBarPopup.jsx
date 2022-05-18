@@ -1,4 +1,6 @@
 import { removeData } from "../../store/userData.js";
+import { useDispatch } from "react-redux";
+import { getUserName } from "../../store/userName.js";
 import {
   Popup,
   Overlay,
@@ -16,9 +18,12 @@ import {
 function NavBarPopup(props) {
   const { popupOpen, isPopupOpen, username, pictureLetters } = props;
 
-  // function logout() {
-  //   localStorage.removeItem("data");
-  // }
+  const dispatch = useDispatch();
+
+  function logout() {
+    dispatch(removeData());
+    dispatch(getUserName(""));
+  }
 
   return (
     <>
@@ -40,7 +45,7 @@ function NavBarPopup(props) {
           <NavBarPopupContentImg src="./assets/popup_img.png" />
         </NavBarPopupContent>
         <NavBarPopupFooter>
-          <NavBarPopupSignOut onClick={() => removeData()}>
+          <NavBarPopupSignOut onClick={() => logout()}>
             Sign Out...
           </NavBarPopupSignOut>
         </NavBarPopupFooter>

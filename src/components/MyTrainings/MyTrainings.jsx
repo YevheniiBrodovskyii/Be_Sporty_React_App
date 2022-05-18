@@ -3,17 +3,15 @@ import { useSelector } from "react-redux";
 import { MyTrainingsContainer } from "./styled.js";
 import DayCard from "../DayCard/DayCard";
 
-import MyTrainingsPopup from "../MyTrainingsPopup/MyTrainingsPopup.jsx";
-
 function MyTrainings({ active }) {
-  const [open, isOpen] = useState(false);
   const [userExercise, takeUserExercise] = useState([]);
+  const [refetch, isRefetch] = useState(false);
 
   const token = useSelector((state) => state.data.data.token);
   const username = useSelector((state) => state.username.username);
 
   useEffect(() => {
-    if (active) {
+    if (active || refetch) {
       const requestOptions = {
         method: "GET",
         headers: {
@@ -31,20 +29,23 @@ function MyTrainings({ active }) {
         takeUserExercise(data);
       };
       getUserExercise();
+      isRefetch(false);
     }
-  }, [active, token, username]);
+  }, [active, token, username, refetch]);
 
   return (
     <>
       <MyTrainingsContainer>
-        <DayCard isOpen={isOpen} />
-        <DayCard />
-        <DayCard />
-        <DayCard />
-        <DayCard />
-        <DayCard />
+        {userExercise.map((item) => (
+          <DayCard
+            key={item.id}
+            day={item.day}
+            exercisesPerDay={item.exercisesPerDay}
+            isRefetch={isRefetch}
+            refetch={refetch}
+          />
+        ))}
       </MyTrainingsContainer>
-      {open ? <MyTrainingsPopup isOpen={isOpen} /> : <></>}
     </>
   );
 }

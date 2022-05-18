@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import {
+  BurderOverlay,
   BurgerContainer,
   BurgerContent,
   BurgerLinks,
@@ -25,6 +26,7 @@ function Burger() {
 
   return (
     <>
+      <BurderOverlay active={burgerClose} onClick={() => handleBurgerClose()} />
       <BurgerContainer>
         <BurgerContent>
           <BurgerImgOpen

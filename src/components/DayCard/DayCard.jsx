@@ -5,23 +5,36 @@ import {
   DayCardExercise,
 } from "./styled.js";
 
+import MyTrainingsPopup from "../MyTrainingsPopup/MyTrainingsPopup.jsx";
+import { useState } from "react";
+
 function DayCard(props) {
-  const { isOpen } = props;
+  const { day, exercisesPerDay, isRefetch, refetch } = props;
+  const [popupOpen, isPopupOpen] = useState(false);
+
+  const dayUppercase = day.charAt(0).toUpperCase() + day.slice(1);
 
   return (
     <>
-      <DayCardContent onClick={() => isOpen(true)}>
+      <DayCardContent onClick={() => isPopupOpen(true)}>
         <DayCardNameContainer>
-          <DayCardName>Monday</DayCardName>
+          <DayCardName>{dayUppercase}</DayCardName>
         </DayCardNameContainer>
-        <DayCardExercise>Exercise 1</DayCardExercise>
-        <DayCardExercise>Exercise 2</DayCardExercise>
-        <DayCardExercise>Exercise 3</DayCardExercise>
-        <DayCardExercise>Exercise 4</DayCardExercise>
-        <DayCardExercise>Exercise 5</DayCardExercise>
-        <DayCardExercise>Exercise 6</DayCardExercise>
-        <DayCardExercise>Exercise 7</DayCardExercise>
+        {exercisesPerDay.map((item, idDay) => (
+          <DayCardExercise key={idDay}>{item.name}</DayCardExercise>
+        ))}
       </DayCardContent>
+      {popupOpen ? (
+        <MyTrainingsPopup
+          isPopupOpen={isPopupOpen}
+          day={day}
+          exercisesPerDay={exercisesPerDay}
+          isRefetch={isRefetch}
+          refetch={refetch}
+        />
+      ) : (
+        <></>
+      )}
     </>
   );
 }

@@ -21,7 +21,6 @@ function ExerciseDescription({
 }) {
   const [exercise, takeExercise] = useState([]);
   const [sendButton, isSendButton] = useState(false);
-  const [sent, isSent] = useState([]);
 
   const token = useSelector((state) => state.data.data.token);
   const username = useSelector((state) => state.username.username);
@@ -32,7 +31,6 @@ function ExerciseDescription({
         method: "GET",
         headers: {
           Accept: "*/*",
-          Authorization: `Bearer ${token}`,
         },
       };
 
@@ -57,21 +55,25 @@ function ExerciseDescription({
   }, [selectedDay]);
 
   function addExercise() {
+    let dataExercise = {
+      name: exercise.name,
+    };
     const requestOptions = {
       method: "POST",
       headers: {
+        "Content-Type": "application/json",
         Accept: "*/*",
         Authorization: `Bearer ${token}`,
       },
+      body: JSON.stringify(dataExercise),
     };
 
     const fetchExercise = async () => {
       const responce = await fetch(
-        `ttp://localhost:8080/api/user/addtraining/${username}?day=${selectedDay}`,
+        `http://localhost:8080/api/user/addtraining/${username}?day=${selectedDay}`,
         requestOptions
       );
-      const data = await responce.json();
-      isSent(data);
+      await responce.json();
     };
     fetchExercise();
   }

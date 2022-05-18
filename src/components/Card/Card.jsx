@@ -10,7 +10,7 @@ import {
 
 import PopupMain from "../PopupMain/PopupMain.jsx";
 
-function Card({ name, id }) {
+function Card({ name, img, id }) {
   const [exercises, takeExercises] = useState([]);
 
   const token = useSelector((state) => state.data.data.token);
@@ -20,7 +20,6 @@ function Card({ name, id }) {
       method: "GET",
       headers: {
         Accept: "*/*",
-        Authorization: `Bearer ${token}`,
       },
     };
 
@@ -41,7 +40,7 @@ function Card({ name, id }) {
     <>
       <CardContent onClick={() => isPopupOpen(true)}>
         <CardImageContainer>
-          <CardImage src="" />
+          <CardImage src={img} />
         </CardImageContainer>
         <CardName>{name}</CardName>
       </CardContent>

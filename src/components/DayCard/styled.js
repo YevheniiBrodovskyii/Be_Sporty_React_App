@@ -32,6 +32,7 @@ const DayCardContent = styled.section`
     border-radius: 15px;
     transition: 0.5s all;
     cursor: pointer;
+    z-index: 7777;
     &:hover {
       transform : scale(105%);
       ${DayCardName} {
@@ -57,12 +58,12 @@ const DayCardContent = styled.section`
   `;
 
 const DayCardExercise = styled.h5`
-    font-size:25px;
+    font-size:18px;
     font-weight: 600;
     text-align: center;
     margin: 15px 0 15px 0;
     @media (min-width: 320px) and (max-width: 480px) {
-    font-size:20px;
+    font-size:15px;
     }
   `
 

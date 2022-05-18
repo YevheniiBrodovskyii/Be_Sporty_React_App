@@ -11,6 +11,7 @@ const Popup = styled.div`
   background-color: #ffffff;
   transform: ${({ active }) => active ? 'translateX(0)' : 'translateX(100%)'};
   transition: transform 0.3s ease-in-out;
+  z-index: 9999;
   @media (min-width: 320px) and (max-width: 480px) {
     width: 70%;
   }
@@ -26,6 +27,8 @@ const Overlay = styled.div`
   width: 100%;
   height: 100vh;
   transition: 0.3s all;
+  z-index: 9999;
+
 `;
 
 const NavBarPopupHeader = styled.div`

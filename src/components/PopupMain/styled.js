@@ -10,6 +10,7 @@ const Overlay = styled.div`
   width: 100%;
   height: 100vh;
   transition: 0.3s all;
+  z-index: 8899;
 `;
 
 
@@ -19,7 +20,7 @@ const PopupMainContent = styled.div`
     left:0;
     height: 100vh;
     width: 35%;
-    z-index: 9999;
+    z-index: 8900;
     background-color: #ffffff;
     transform: ${({ active }) => active ? 'translateX(0)' : 'translateX(-100%)'};
     transition: transform 0.3s ease-in-out;

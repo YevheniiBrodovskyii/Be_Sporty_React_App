@@ -13,6 +13,7 @@ const NavBarContainer = styled.nav`
     height: 100px;
     background: #ffffff;
     border-radius: 30px;
+    z-index: 8888;
     @media (min-width: 320px) and (max-width: 768px) {
       position:fixed;
       top:0;

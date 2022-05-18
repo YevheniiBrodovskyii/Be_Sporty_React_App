@@ -1,17 +1,47 @@
+import { useSelector } from "react-redux";
 import {
   MyTrainingsPopupOverlay,
   MyTrainingsPopupWrapper,
   MyTrainingsPopupContent,
   MyTrainingsPopupTitle,
   MyTrainingsPopupClose,
-  MyTrainingsPopupExerciseClose,
+  MyTrainingsPopupExerciseDelete,
   MyTrainingsPopupExercise,
   MyTrainingsPopupBtnContainer,
   MyTrainingsPopupBtn,
+  MyTrainingsPopupWarning,
 } from "./styled.js";
 
 function MyTrainingsPopup(props) {
-  const { isOpen } = props;
+  const { isPopupOpen, day, exercisesPerDay, isRefetch, refetch } = props;
+
+  const token = useSelector((state) => state.data.data.token);
+  const username = useSelector((state) => state.username.username);
+
+  function deleteExercise(exercise) {
+    let dataExercise = {
+      name: exercise,
+    };
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "*/*",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(dataExercise),
+    };
+
+    const fetchExercise = async () => {
+      const responce = await fetch(
+        `http://localhost:8080/api/user/deletetraining/${username}?day=${day}`,
+        requestOptions
+      );
+      await responce.json();
+    };
+    fetchExercise();
+    isRefetch(true);
+  }
 
   return (
     <MyTrainingsPopupOverlay>
@@ -19,36 +49,28 @@ function MyTrainingsPopup(props) {
         <MyTrainingsPopupContent>
           <MyTrainingsPopupClose
             src="./assets/close_black.svg"
-            onClick={() => isOpen(false)}
+            onClick={() => isPopupOpen(false)}
           />
-          <MyTrainingsPopupTitle>Monday</MyTrainingsPopupTitle>
-          <MyTrainingsPopupExercise>
-            <MyTrainingsPopupExerciseClose src="./assets/close_red.svg" />
-            Exercise 1
-          </MyTrainingsPopupExercise>
-          <MyTrainingsPopupExercise>
-            <MyTrainingsPopupExerciseClose src="./assets/close_red.svg" />
-            Exercise 2
-          </MyTrainingsPopupExercise>
-          <MyTrainingsPopupExercise>
-            <MyTrainingsPopupExerciseClose src="./assets/close_red.svg" />
-            Exercise 3
-          </MyTrainingsPopupExercise>
-          <MyTrainingsPopupExercise>
-            <MyTrainingsPopupExerciseClose src="./assets/close_red.svg" />
-            Exercise 4
-          </MyTrainingsPopupExercise>
-          <MyTrainingsPopupExercise>
-            <MyTrainingsPopupExerciseClose src="./assets/close_red.svg" />
-            Exercise 5
-          </MyTrainingsPopupExercise>
-          <MyTrainingsPopupExercise>
-            <MyTrainingsPopupExerciseClose src="./assets/close_red.svg" />
-            Exercise 6
-          </MyTrainingsPopupExercise>
-          <MyTrainingsPopupBtnContainer>
-            <MyTrainingsPopupBtn to="/Cards">Add more...</MyTrainingsPopupBtn>
-          </MyTrainingsPopupBtnContainer>
+          <MyTrainingsPopupTitle>{day}</MyTrainingsPopupTitle>
+          {exercisesPerDay.map((item, idExercise) => (
+            <MyTrainingsPopupExercise key={idExercise}>
+              <MyTrainingsPopupExerciseDelete
+                src="./assets/close_red.svg"
+                onClick={() => deleteExercise(item.name)}
+              />
+              {item.name}
+            </MyTrainingsPopupExercise>
+          ))}
+
+          {exercisesPerDay.length >= 8 ? (
+            <MyTrainingsPopupWarning>
+              *Your training day should not consist of more than 8 exercises
+            </MyTrainingsPopupWarning>
+          ) : (
+            <MyTrainingsPopupBtnContainer>
+              <MyTrainingsPopupBtn to="/Cards">Add more...</MyTrainingsPopupBtn>
+            </MyTrainingsPopupBtnContainer>
+          )}
         </MyTrainingsPopupContent>
       </MyTrainingsPopupWrapper>
     </MyTrainingsPopupOverlay>

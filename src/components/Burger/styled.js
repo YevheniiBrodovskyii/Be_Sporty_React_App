@@ -1,6 +1,22 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
+
+const BurderOverlay = styled.div`
+    display:none;
+    position: fixed;
+    top: 0px;
+    left: 0;
+    width:100%;
+    height: 100vh;
+    visibility: ${({ active }) => active ? 'visible' : 'hidden'};
+    transition: 0.4s all;
+    @media (min-width: 320px) and (max-width: 768px) {
+      display:block;
+  }
+
+`
+
 const BurgerContainer = styled.div`
     width: 60px;
     margin: 0 auto;
@@ -20,7 +36,7 @@ const BurgerContent = styled.div`
   flex-direction:column;
   justify-content:center;
   margin: 0 auto;
-  padding:25px 0;
+  padding:35px 0 0 0;
   background-color:white;
   border-bottom-left-radius:30px;
   border-bottom-right-radius:30px;
@@ -44,6 +60,10 @@ const BurgerContent = styled.div`
     font-size: 20px;
     letter-spacing: 1px;
     word-spacing: -4px;
+    &:last-child {
+      border-bottom-left-radius:30px;
+      border-bottom-right-radius:30px;
+    }
     @media (min-width: 320px) and (max-width: 768px) {
     display: block;
     &.active {
@@ -63,4 +83,4 @@ const BurgerContent = styled.div`
 
 
   
-export {BurgerContainer, BurgerContent, BurgerLinks, BurgerLink, BurgerImgOpen, BurgerImgClose}
+export {BurderOverlay, BurgerContainer, BurgerContent, BurgerLinks, BurgerLink, BurgerImgOpen, BurgerImgClose}
