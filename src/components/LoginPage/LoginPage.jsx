@@ -46,6 +46,12 @@ function LoginPage() {
         "http://localhost:8080/api/login",
         requestOptions
       );
+      if (responce.status !== 200) {
+        const data = await responce.json();
+        dispatch(setError(data.error_message));
+        dispatch(getData([]));
+        dispatch(getUserName(""));
+      }
       const data = await responce.json();
       dispatch(getData(data));
       dispatch(getUserName(user.username));
@@ -78,6 +84,7 @@ function LoginPage() {
           />
           <LoginPageSubtitle>Password:</LoginPageSubtitle>
           <LoginPageInput
+            type="password"
             placeholder="Password..."
             onChange={(e) => {
               isPassword(e.target.value);

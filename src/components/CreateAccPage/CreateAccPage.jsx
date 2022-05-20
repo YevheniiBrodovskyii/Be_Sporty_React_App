@@ -29,9 +29,9 @@ function CreateAccPage(props) {
 
   function signUpUser() {
     if (
-      !errorUsernameEmpty
-      // !errorEmailValid &&
-      // !passwordValid
+      !errorUsernameEmpty &&
+      !errorEmailValid &&
+      !passwordValid
       // !passwordMatch
     ) {
       let user = {
@@ -54,8 +54,7 @@ function CreateAccPage(props) {
           "http://localhost:8080/api/signup",
           requestOptions
         );
-        const data = await responce.json();
-        // getToken(data);
+        await responce.json();
       };
       fetchToken();
       isNewUser(true);
@@ -64,6 +63,7 @@ function CreateAccPage(props) {
         isNewUser(false);
         isSignUpOpen(false);
       }, 3000);
+    } else {
     }
   }
 
@@ -119,6 +119,7 @@ function CreateAccPage(props) {
           )}
           <CreateAccSubtitle>Password:</CreateAccSubtitle>
           <CreateAccInput
+            type="password"
             placeholder="Password..."
             onChange={(e) => {
               isPassword(e.target.value);
@@ -133,6 +134,7 @@ function CreateAccPage(props) {
           )}
           <CreateAccSubtitle>Confirm Password:</CreateAccSubtitle>
           <CreateAccInput
+            type="password"
             placeholder="Confirm Password..."
             onChange={(e) => {
               isPasswordRepeat(e.target.value);

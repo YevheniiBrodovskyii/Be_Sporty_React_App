@@ -13,28 +13,22 @@ function MainPage() {
 
   return (
     <>
-      {loaded ? (
-        <Loader />
+      {!data.token ? (
+        <LoginPage />
       ) : (
-        <>
-          {!data.token ? (
-            <LoginPage />
-          ) : (
-            <BrowserRouter>
-              <NavBar />
-              <Routes>
-                <Route
-                  exact
-                  path="/MyTrainings"
-                  element={<MyTrainings active={true} />}
-                ></Route>
-                <Route index exact path="/Cards" element={<Cards />}></Route>
-                <Route exact path="/AboutUs" element={<AboutUs />}></Route>
-                <Route path="*" element={<Cards />} />
-              </Routes>
-            </BrowserRouter>
-          )}
-        </>
+        <BrowserRouter>
+          <NavBar />
+          <Routes>
+            <Route
+              exact
+              path="/MyTrainings"
+              element={<MyTrainings active={true} />}
+            ></Route>
+            <Route index exact path="/Cards" element={<Cards />}></Route>
+            <Route exact path="/AboutUs" element={<AboutUs />}></Route>
+            <Route path="*" element={<Cards />} />
+          </Routes>
+        </BrowserRouter>
       )}
     </>
   );
