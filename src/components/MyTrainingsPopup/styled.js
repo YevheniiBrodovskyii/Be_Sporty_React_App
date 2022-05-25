@@ -219,5 +219,12 @@ const MyTrainingsPopupEmptyWarning = styled.div`
     }
 `
 
+const MyTrainingsPopupStatus = styled.div`
 
-export {MyTrainingsPopupOverlay, MyTrainingsPopupWrapper, MyTrainingsPopupContent, MyTrainingsPopupTitle, MyTrainingsPopupClose, MyTrainingsPopupExerciseDelete, MyTrainingsPopupExercise,MyTrainingsPopupBtnContainer,  MyTrainingsPopupBtn, MyTrainingsPopupWarning, MyTrainingsPopupEmptyWarning};
+`
+
+const MyTrainingsPopupStatusDescr = styled.p`
+
+`
+
+export {MyTrainingsPopupOverlay, MyTrainingsPopupWrapper, MyTrainingsPopupContent, MyTrainingsPopupTitle, MyTrainingsPopupClose, MyTrainingsPopupExerciseDelete, MyTrainingsPopupExercise,MyTrainingsPopupBtnContainer,  MyTrainingsPopupBtn, MyTrainingsPopupWarning, MyTrainingsPopupEmptyWarning, MyTrainingsPopupStatus, MyTrainingsPopupStatusDescr};

@@ -1,4 +1,5 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setStatus } from "../../store/statusMessage.js";
 import {
   MyTrainingsPopupOverlay,
   MyTrainingsPopupWrapper,
@@ -19,6 +20,8 @@ function MyTrainingsPopup(props) {
   const token = useSelector((state) => state.data.data.token);
   const username = useSelector((state) => state.username.username);
 
+  const dispatch = useDispatch();
+
   function deleteExercise(exercise) {
     let dataExercise = {
       name: exercise,
@@ -38,6 +41,12 @@ function MyTrainingsPopup(props) {
         `http://localhost:8080/api/user/deletetraining/${username}?day=${day}`,
         requestOptions
       );
+      if (responce.status !== 200) {
+        const data = await responce.json();
+        dispatch(setStatus(data.error_message));
+      } else {
+        dispatch(setStatus("Successfully deleted"));
+      }
       await responce.json();
     };
     fetchExercise();

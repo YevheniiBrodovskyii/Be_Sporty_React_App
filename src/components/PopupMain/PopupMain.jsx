@@ -17,6 +17,7 @@ function PopupMain(props) {
   const [exerciseDescr, isExerciseDescr] = useState(false);
   const [active, isActive] = useState(false);
   const [exerciseId, getExerciseId] = useState(null);
+  const [exerciseName, getExerciseName] = useState("");
   const [selectedDay, getSelectedDay] = useState("Add to my trainings");
 
   function closePopup() {
@@ -45,6 +46,7 @@ function PopupMain(props) {
                 clickOnQuestion();
                 getSelectedDay("Add to my trainings");
                 getExerciseId(item.id);
+                getExerciseName(item.name);
               }}
             />
           </PopupMainExercise>
@@ -64,6 +66,7 @@ function PopupMain(props) {
         isExerciseDescr={isExerciseDescr}
         active={exerciseDescr}
         id={exerciseId}
+        name={exerciseName}
         selectedDay={selectedDay}
         getSelectedDay={getSelectedDay}
       />

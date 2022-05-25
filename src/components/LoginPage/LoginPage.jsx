@@ -65,6 +65,11 @@ function LoginPage() {
     dispatch(setError(""));
   }
 
+  function openSignUp() {
+    dispatch(setError(""));
+    isSignUpOpen(true);
+  }
+
   return (
     <>
       {signUp ? (
@@ -97,7 +102,7 @@ function LoginPage() {
             <></>
           )}
           <LoginPageButton onClick={() => LoginUser()}>Login</LoginPageButton>
-          <LoginPageButton onClick={() => isSignUpOpen(true)}>
+          <LoginPageButton onClick={() => openSignUp()}>
             Sign Up
           </LoginPageButton>
           <LoginPageButtonGuest onClick={() => asGuest()}>

@@ -19,7 +19,7 @@ const ExerciseDescriptionContent = styled.div`
     grid-template: 15% 65% 20% / 49% 49% ;
     column-gap: 2%;
     position:fixed;
-    top: 10.7%;
+    top: 100px;
     width: 50%;
     height: 645px;
     border-top-right-radius: 30px;
@@ -30,7 +30,6 @@ const ExerciseDescriptionContent = styled.div`
     transition: transform 0.3s ease-in-out;
     @media (min-width: 1025px) and (max-width: 1600px) {
         background-color: rgba(0, 75, 143, 1);
-        top: 8.7%;
         width:55%;
         transform: ${({ active }) => active ? 'translateX(54.5%)' : 'translateX(-130%)'};
     }
@@ -44,7 +43,7 @@ const ExerciseDescriptionContent = styled.div`
         width:80%;
         z-index: 9999;
         background-color: rgba(0, 75, 143, 1);
-        transform: ${({ active }) => active ? 'translateX(-12.3%)' : 'translateX(-130%)'};
+        transform: ${({ active }) => active ? 'translateX(-12.5%)' : 'translateX(-130%)'};
     }
     @media (min-width: 320px) and (max-width: 480px) {
         width:98%;
@@ -88,7 +87,10 @@ const ExerciseDescriptionTitle = styled.h2`
 
 const ExerciseDescriptionImg = styled.img`
     grid-column: 1/2;
-    background-color: gray;
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    background-color: white;
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
 `
@@ -149,7 +151,7 @@ const ExerciseDescriptionButton = styled.button`
     right:-15.5%;
     top:40%;
     z-index:-1;
-    transform: ${({ active }) => active ? 'translateX(0%) rotate(90deg)' : 'translateX(-100%) rotate(90deg)'};
+    transform: ${({ active }) => active ? 'translateX(-1%) rotate(90deg)' : 'translateX(-100%) rotate(90deg)'};
     width:20%;
     height: 100px;
     font-size:40px;
@@ -176,11 +178,12 @@ const ExerciseDescriptionButton = styled.button`
         transition: 0.5s ease-in-out;
     }
     @media (min-width: 481px) and (max-width: 768px) {
+        width:30%; 
         font-size:30px;
-        transform: ${({ active }) => active ? 'translateX(0%) rotate(90deg)' : 'translateX(-120%) rotate(90deg)'};
+        transform: ${({ active }) => active ? 'translateX(30%) rotate(90deg)' : 'translateX(-120%) rotate(90deg)'};
 
     }
-    @media (min-width: 320px) and (max-width: 481px) {
+    @media (min-width: 320px) and (max-width: 480px) {
         right:0;
         top: 84.5%;
         width:40%;
@@ -195,4 +198,20 @@ const ExerciseDescriptionButton = styled.button`
     }
 `
 
-export {Overlay, ExerciseDescriptionContent, ExerciseDescriptionClose, ExerciseDescriptionTitle, ExerciseDescriptionImg, ExerciseDescriptionDescr, ExerciseDescriptionSelect, ExerciseDescriptionOption, ExerciseDescriptionButton}
+const ExerciseDescriptionSignUp = styled.button`
+    grid-column: 1/3;
+    font-size:20px;
+    width:250px;
+    height:60px;
+    margin: 30px auto;
+    background-color: #000000;
+    border-radius: 30px;
+    border:none;
+    color:white;
+    @media (min-width: 320px) and (max-width: 768px) {
+    font-size:15px;
+    height:40px;
+    }
+`
+
+export {Overlay, ExerciseDescriptionContent, ExerciseDescriptionClose, ExerciseDescriptionTitle, ExerciseDescriptionImg, ExerciseDescriptionDescr, ExerciseDescriptionSelect, ExerciseDescriptionOption, ExerciseDescriptionButton, ExerciseDescriptionSignUp }

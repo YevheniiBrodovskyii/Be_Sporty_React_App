@@ -5,19 +5,21 @@ import userData from "./userData";
 import userName from "./userName";
 import loadingStatus from "./loadingStatus";
 import errorInfo from "./errorInfo";
+import statusMessage from "./statusMessage";
 
 const rootReducer = combineReducers({
     data: userData,
     username: userName,
     loaded: loadingStatus,
-    error: errorInfo
+    error: errorInfo,
+    status: statusMessage
 });
 
 
 const persistConfig = {
     key: 'root',
     storage,
-    blacklist: ['loaded', 'error']
+    blacklist: ['loaded', 'error', 'status']
 }
 
 

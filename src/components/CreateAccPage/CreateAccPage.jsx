@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-// import { getToken } from "../../index.js";
+import { useSelector, useDispatch } from "react-redux";
+import { getData } from "../../store/userData.js";
+import { getUserName } from "../../store/userName.js";
+import { setError } from "../../store/errorInfo.js";
 
 import {
   CreateAccContent,
@@ -27,6 +30,10 @@ function CreateAccPage(props) {
   const [passwordValid, isPasswordValid] = useState(false);
   const [passwordMatch, isPasswordMatch] = useState(false);
 
+  const errorMessage = useSelector((state) => state.error.error);
+
+  const dispatch = useDispatch();
+
   function signUpUser() {
     if (
       !errorUsernameEmpty &&
@@ -48,22 +55,30 @@ function CreateAccPage(props) {
         },
         body: JSON.stringify(user),
       };
-
       const fetchToken = async () => {
         const responce = await fetch(
           "http://localhost:8080/api/signup",
           requestOptions
         );
-        await responce.json();
+        if (responce.status !== 201) {
+          const data = await responce.json();
+          dispatch(setError(data.error_message));
+          dispatch(getData([]));
+          dispatch(getUserName(""));
+        } else {
+          isNewUser(true);
+          isSuccessMessage(true);
+          dispatch(setError(""));
+          setTimeout(() => {
+            isNewUser(false);
+            isSignUpOpen(false);
+          }, 3000);
+          const data = await responce.json();
+          dispatch(getData(data));
+          dispatch(getUserName(username));
+        }
       };
       fetchToken();
-      isNewUser(true);
-      isSuccessMessage(true);
-      setTimeout(() => {
-        isNewUser(false);
-        isSignUpOpen(false);
-      }, 3000);
-    } else {
     }
   }
 
@@ -142,6 +157,11 @@ function CreateAccPage(props) {
           />
           {passwordMatch ? (
             <CreateAccError>Passwords didn't match</CreateAccError>
+          ) : (
+            <></>
+          )}
+          {errorMessage ? (
+            <CreateAccError>{errorMessage}</CreateAccError>
           ) : (
             <></>
           )}

@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getData } from "../../store/userData.js";
+import { getUserName } from "../../store/userName.js";
+import { setStatus } from "../../store/statusMessage.js";
 import {
   Overlay,
   ExerciseDescriptionContent,
@@ -10,12 +13,14 @@ import {
   ExerciseDescriptionSelect,
   ExerciseDescriptionOption,
   ExerciseDescriptionButton,
+  ExerciseDescriptionSignUp,
 } from "./styled.js";
 
 function ExerciseDescription({
   isExerciseDescr,
   active,
   id,
+  name,
   selectedDay,
   getSelectedDay,
 }) {
@@ -24,6 +29,8 @@ function ExerciseDescription({
 
   const token = useSelector((state) => state.data.data.token);
   const username = useSelector((state) => state.username.username);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (active) {
@@ -36,7 +43,7 @@ function ExerciseDescription({
 
       const fetchExerciseGroups = async () => {
         const responce = await fetch(
-          `http://localhost:8080/api/exercises/${id}`,
+          `http://localhost:8080/api/exercises/${id}/details`,
           requestOptions
         );
         const data = await responce.json();
@@ -56,7 +63,7 @@ function ExerciseDescription({
 
   function addExercise() {
     let dataExercise = {
-      name: exercise.name,
+      name: name,
     };
     const requestOptions = {
       method: "POST",
@@ -73,9 +80,19 @@ function ExerciseDescription({
         `http://localhost:8080/api/user/addtraining/${username}?day=${selectedDay}`,
         requestOptions
       );
-      await responce.json();
+      if (responce.status !== 200) {
+        const data = await responce.json();
+        dispatch(setStatus(data.error_message));
+      } else {
+        dispatch(setStatus("Successfully added"));
+      }
     };
     fetchExercise();
+  }
+
+  function goLogin() {
+    dispatch(getData([]));
+    dispatch(getUserName(""));
   }
 
   return (
@@ -90,43 +107,51 @@ function ExerciseDescription({
             getSelectedDay("Add to my trainings");
           }}
         />
-        <ExerciseDescriptionTitle>{exercise.name}</ExerciseDescriptionTitle>
-        <ExerciseDescriptionImg src="#" alt="IMG" />
+        <ExerciseDescriptionTitle>{name}</ExerciseDescriptionTitle>
+        <ExerciseDescriptionImg src={exercise.imageSrc} alt="IMG" />
         <ExerciseDescriptionDescr>
           {exercise.description}
         </ExerciseDescriptionDescr>
-        <ExerciseDescriptionSelect
-          value={selectedDay}
-          onChange={(e) => getSelectedDay(e.target.value)}
-        >
-          <ExerciseDescriptionOption>
-            Add to my trainings
-          </ExerciseDescriptionOption>
-          <ExerciseDescriptionOption value="monday">
-            Monday
-          </ExerciseDescriptionOption>
-          <ExerciseDescriptionOption value="tuesday">
-            Tuesday
-          </ExerciseDescriptionOption>
-          <ExerciseDescriptionOption value="wednesday">
-            Wednesday
-          </ExerciseDescriptionOption>
-          <ExerciseDescriptionOption value="thursday">
-            Thursday
-          </ExerciseDescriptionOption>
-          <ExerciseDescriptionOption value="friday">
-            Friday
-          </ExerciseDescriptionOption>
-          <ExerciseDescriptionOption value="saturday">
-            Saturday
-          </ExerciseDescriptionOption>
-        </ExerciseDescriptionSelect>
-        <ExerciseDescriptionButton
-          active={sendButton}
-          onClick={() => addExercise()}
-        >
-          Add
-        </ExerciseDescriptionButton>
+        {token === "quest" ? (
+          <ExerciseDescriptionSignUp onClick={() => goLogin()}>
+            Create an account
+          </ExerciseDescriptionSignUp>
+        ) : (
+          <>
+            <ExerciseDescriptionSelect
+              value={selectedDay}
+              onChange={(e) => getSelectedDay(e.target.value)}
+            >
+              <ExerciseDescriptionOption>
+                Add to my trainings
+              </ExerciseDescriptionOption>
+              <ExerciseDescriptionOption value="monday">
+                Monday
+              </ExerciseDescriptionOption>
+              <ExerciseDescriptionOption value="tuesday">
+                Tuesday
+              </ExerciseDescriptionOption>
+              <ExerciseDescriptionOption value="wednesday">
+                Wednesday
+              </ExerciseDescriptionOption>
+              <ExerciseDescriptionOption value="thursday">
+                Thursday
+              </ExerciseDescriptionOption>
+              <ExerciseDescriptionOption value="friday">
+                Friday
+              </ExerciseDescriptionOption>
+              <ExerciseDescriptionOption value="saturday">
+                Saturday
+              </ExerciseDescriptionOption>
+            </ExerciseDescriptionSelect>
+            <ExerciseDescriptionButton
+              active={sendButton}
+              onClick={() => addExercise()}
+            >
+              Add
+            </ExerciseDescriptionButton>
+          </>
+        )}
       </ExerciseDescriptionContent>
     </>
   );
